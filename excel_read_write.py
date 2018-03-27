@@ -30,9 +30,12 @@ write_content = write_xls.get_sheet(1) ## 使用get_sheet(index值) 來取得第
 
 for i in range (2, sheet_0.nrows,1):   ##  內容的數字是從index = 2 開始
     data = sheet_0.cell_value(i,0)
+    data1000 = (data * 10 + 4) /4
+    formula = "=(" + str(data) + "*10+4)/4"
     if data >= 3.0 :
-        data1000 = data * 1000
         write_content.write(i,0, data1000)        ## 前面第一個數字表示第幾列，第二個數字是欄，第三個為內容
+        write_content.write(i,1, formula)         ## 可以多重運算後，再寫入另外一欄的資料列中
     else: 
         write_content.write(i,0, "資料過小")
+        write_content.write(i,1, formula)
     write_xls.save("python_test.xls")             ## 最後，存檔離開，亦可選擇其他路徑，另存新檔
